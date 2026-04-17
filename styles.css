@@ -10,6 +10,7 @@ body {
     color: var(--tg-theme-text-color, #ffffff);
     min-height: 100vh;
     overflow: hidden;
+    -webkit-tap-highlight-color: transparent; /* Убирает синее выделение */
 }
 
 .container {
@@ -43,6 +44,7 @@ body {
 .subtitle {
     font-size: 18px;
     opacity: 0.8;
+    color: var(--tg-theme-hint-color, #aaaaaa);
 }
 
 .menu {
@@ -61,9 +63,25 @@ body {
     transition: all 0.2s ease;
 }
 
-.solo { background: linear-gradient(135deg, #4ade80, #22c55e); color: #111; }
+.solo { 
+    background: linear-gradient(135deg, #4ade80, #22c55e); 
+    color: #ffffff; /* Белый текст на кнопке Одиночная */
+}
 .coop { background: linear-gradient(135deg, #60a5fa, #3b82f6); color: #fff; }
 .duel { background: linear-gradient(135deg, #f472b6, #ec4899); color: #fff; }
+
+/* Футер (версия) */
+.footer {
+    margin-top: auto;
+    padding-top: 60px;
+    text-align: center;
+}
+
+.version {
+    font-size: 14px;
+    opacity: 0.7;
+    color: var(--tg-theme-hint-color, #aaaaaa); /* Тот же цвет, что у подзаголовка */
+}
 
 /* ==================== НАСТРОЙКИ ==================== */
 .settings-header {
@@ -101,10 +119,8 @@ body {
 label {
     font-size: 18px;
     font-weight: 500;
-    color: var(--tg-theme-text-color, #ffffff);
 }
 
-/* Кнопки выбора размера — исправлена читаемость в тёмной теме */
 .preset-buttons {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -121,7 +137,6 @@ label {
     font-weight: 600;
     cursor: pointer;
     transition: all 0.25s ease;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 .preset-btn small {
@@ -135,7 +150,6 @@ label {
     border-color: var(--tg-theme-accent-text-color, #00a3ff);
     background: rgba(0, 163, 255, 0.20);
     box-shadow: 0 0 0 3px rgba(0, 163, 255, 0.15);
-    color: var(--tg-theme-text-color, #ffffff);
 }
 
 .preset-btn:hover {
@@ -143,7 +157,6 @@ label {
     background: rgba(255,255,255,0.08);
 }
 
-/* Поля ввода для своего размера */
 .custom-fields {
     margin-top: 8px;
 }
@@ -185,7 +198,6 @@ input[type="number"] {
     border: none;
     border-radius: 16px;
     cursor: pointer;
-    box-shadow: 0 4px 15px rgba(0, 163, 255, 0.3);
 }
 
 .hidden {
