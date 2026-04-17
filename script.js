@@ -4,7 +4,6 @@ tg.ready();
 
 let currentScreen = 'main-menu';
 
-// Элементы
 const mainMenu = document.getElementById('main-menu');
 const soloSettings = document.getElementById('solo-settings');
 
@@ -13,12 +12,10 @@ const backToMenu = document.getElementById('back-to-menu');
 const startGameBtn = document.getElementById('start-game');
 
 const presetBtns = document.querySelectorAll('.preset-btn');
-const customBtn = document.getElementById('custom-size');
 const customFields = document.getElementById('custom-fields');
 const minesInput = document.getElementById('mines');
 const minesInfo = document.getElementById('mines-info');
 
-// Переключение экранов
 function showScreen(screenId) {
     document.querySelectorAll('.screen').forEach(screen => {
         screen.classList.remove('active');
@@ -27,18 +24,15 @@ function showScreen(screenId) {
     currentScreen = screenId;
 }
 
-// Главное меню → Настройки
 btnSolo.addEventListener('click', () => {
     showScreen('solo-settings');
     updateMinesRecommendation(9, 9);
 });
 
-// Кнопка "Домой"
 backToMenu.addEventListener('click', () => {
     showScreen('main-menu');
 });
 
-// Выбор пресетов
 presetBtns.forEach(btn => {
     btn.addEventListener('click', () => {
         presetBtns.forEach(b => b.classList.remove('active'));
@@ -55,15 +49,13 @@ presetBtns.forEach(btn => {
     });
 });
 
-// Обновление рекомендации по минам
 function updateMinesRecommendation(width, height) {
     const totalCells = width * height;
-    const recommended = Math.floor(totalCells * 0.156); // классическая плотность ~15.6%
+    const recommended = Math.floor(totalCells * 0.156);
     minesInput.value = recommended;
     minesInfo.textContent = `Рекомендуется: ${recommended} для ${width}×${height}`;
 }
 
-// Кнопка "Начать игру" (пока просто алерт)
 startGameBtn.addEventListener('click', () => {
     let width, height;
 
@@ -91,12 +83,10 @@ startGameBtn.addEventListener('click', () => {
 
     tg.showPopup({
         title: 'Игра запущена!',
-        message: `Поле: ${width}×${height}\nМин: ${mines}\n\nИгра скоро появится...`,
+        message: `Поле: ${width}×${height}\nМин: ${mines}\n\nСледующий шаг — игровое поле.`,
         buttons: [{ text: 'OK', type: 'ok' }]
     });
-
-    // Здесь в будущем будет переход на экран игры
 });
 
 tg.MainButton.hide();
-console.log('FureZ Minesweeper v0.2 загружен');
+console.log('FureZ Minesweeper v0.3 загружен');
