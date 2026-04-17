@@ -1,4 +1,8 @@
-* { margin: 0; padding: 0; box-sizing: border-box; }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -8,145 +12,164 @@ body {
     overflow: hidden;
 }
 
-.container { padding: 20px; text-align: center; }
-
-.screen { display: none; flex-direction: column; min-height: 100vh; }
-.screen.active { display: flex; }
-
-.title { font-size: 42px; font-weight: 700; color: #00a3ff; }
-.subtitle { font-size: 18px; opacity: 0.8; margin-top: 8px; }
-
-.menu { 
-    display: flex; 
-    flex-direction: column; 
-    gap: 16px; 
-    width: 100%; 
-    max-width: 340px; 
+.container {
+    padding: 20px;
+    max-width: 420px;
     margin: 0 auto;
 }
 
+/* Экраны */
+.screen {
+    display: none;
+    min-height: 100vh;
+}
+
+.screen.active {
+    display: block;
+}
+
+/* Главное меню (оставляем как было) */
+.header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.title {
+    font-size: 42px;
+    font-weight: 700;
+    color: var(--tg-theme-accent-text-color, #00a3ff);
+}
+
+.subtitle {
+    font-size: 18px;
+    opacity: 0.8;
+    color: var(--tg-theme-hint-color, #aaaaaa);
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
 .menu-btn {
-    padding: 18px;
+    padding: 18px 24px;
     font-size: 22px;
     font-weight: 600;
     border: none;
     border-radius: 16px;
-    color: #111;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    cursor: pointer;
+    transition: all 0.2s ease;
 }
 
-.solo { background: linear-gradient(135deg, #4ade80, #22c55e); }
-.coop { background: linear-gradient(135deg, #60a5fa, #3b82f6); color: white; }
-.duel { background: linear-gradient(135deg, #f472b6, #ec4899); color: white; }
+.solo { background: linear-gradient(135deg, #4ade80, #22c55e); color: #111; }
+.coop { background: linear-gradient(135deg, #60a5fa, #3b82f6); color: #fff; }
+.duel { background: linear-gradient(135deg, #f472b6, #ec4899); color: #fff; }
 
-.screen-title { font-size: 28px; margin-bottom: 30px; }
-
-.settings { margin-bottom: 40px; text-align: left; max-width: 300px; margin-left: auto; margin-right: auto; }
-
-.setting-group {
-    margin-bottom: 20px;
-}
-
-.setting-group label {
-    display: block;
-    margin-bottom: 6px;
-    opacity: 0.9;
-}
-
-.setting-group select, .setting-group input {
-    width: 100%;
-    padding: 12px;
-    border-radius: 12px;
-    background: var(--tg-theme-secondary-bg-color, #2c2c2c);
-    color: var(--tg-theme-text-color, #fff);
-    border: none;
-    font-size: 17px;
-}
-
-.start-btn {
-    background: #22c55e;
-    color: #111;
-    padding: 16px 40px;
-    font-size: 20px;
-    font-weight: 600;
-    border: none;
-    border-radius: 16px;
-    margin-bottom: 15px;
-    width: 100%;
-    max-width: 300px;
+/* Настройки */
+.settings-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 40px;
 }
 
 .back-btn {
-    background: transparent;
-    color: var(--tg-theme-hint-color, #aaa);
-    border: 2px solid var(--tg-theme-hint-color, #aaa);
-    padding: 12px 30px;
-    border-radius: 12px;
-}
-
-/* Игровое поле */
-.game-header {
-    display: flex;
-    justify-content: space-between;
-    padding: 15px 20px;
-    background: rgba(0,0,0,0.3);
-    font-size: 24px;
-    font-weight: bold;
-    width: 100%;
-}
-
-.board {
-    display: grid;
-    gap: 2px;
-    background: #333;
-    padding: 10px;
-    border-radius: 12px;
-    margin: 10px auto;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
-}
-
-.cell {
-    width: 32px;
-    height: 32px;
-    background: #bbb;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 18px;
-    font-weight: bold;
+    background: none;
+    border: none;
+    font-size: 32px;
     cursor: pointer;
-    user-select: none;
-    border: 2px solid #ddd;
-    border-top-color: #fff;
-    border-left-color: #fff;
-}
-
-.cell.revealed {
-    background: #ddd;
-    border: 1px solid #888;
-}
-
-.cell.mine { background: #ff4444; }
-.cell.flag { background: #ffdd44; }
-
-.number-1 { color: #1976d2; }
-.number-2 { color: #388e3c; }
-.number-3 { color: #d32f2f; }
-.number-4 { color: #7b1fa2; }
-.number-5 { color: #f57c00; }
-.number-6 { color: #0097a7; }
-.number-7 { color: #000; }
-.number-8 { color: #555; }
-
-.game-controls {
-    margin-top: 20px;
-    display: flex;
-    gap: 12px;
-    justify-content: center;
-}
-
-.control-btn {
-    padding: 12px 24px;
-    font-size: 16px;
+    padding: 8px;
     border-radius: 12px;
+    transition: background 0.2s;
+}
+
+.back-btn:hover {
+    background: rgba(255,255,255,0.1);
+}
+
+.settings-form {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.setting-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+label {
+    font-size: 18px;
+    font-weight: 500;
+    opacity: 0.9;
+}
+
+.preset-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.preset-btn {
+    padding: 16px 12px;
+    background: var(--tg-theme-secondary-bg-color, #2c2c2c);
+    border: 2px solid transparent;
+    border-radius: 12px;
+    font-size: 17px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.preset-btn.active {
+    border-color: var(--tg-theme-accent-text-color, #00a3ff);
+    background: rgba(0, 163, 255, 0.15);
+}
+
+.custom-fields {
+    margin-top: 10px;
+}
+
+.input-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+input[type="number"] {
+    width: 100%;
+    padding: 14px;
+    font-size: 18px;
+    background: var(--tg-theme-secondary-bg-color, #2c2c2c);
+    border: 1px solid #555;
+    border-radius: 10px;
+    color: var(--tg-theme-text-color, #fff);
+}
+
+.mines-input {
+    font-size: 22px;
+    padding: 16px;
+}
+
+.info-text {
+    font-size: 14px;
+    opacity: 0.7;
+}
+
+.start-btn {
+    margin-top: 40px;
+    padding: 18px;
+    font-size: 22px;
+    font-weight: 700;
+    background: linear-gradient(135deg, #00a3ff, #0088cc);
+    color: white;
+    border: none;
+    border-radius: 16px;
+    cursor: pointer;
+}
+
+.hidden {
+    display: none !important;
 }
