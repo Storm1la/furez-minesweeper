@@ -23,7 +23,7 @@
             </div>
 
             <div class="footer">
-                <p class="version">v0.4 • Сделано с ❤️ by FureZ</p>
+                <p class="version">v0.5 • Сделано с ❤️ by FureZ</p>
             </div>
         </div>
     </div>
@@ -68,6 +68,24 @@
             </div>
 
             <button id="start-game" class="start-btn">Начать игру</button>
+        </div>
+    </div>
+
+    <!-- === НОВЫЙ ЭКРАН: ИГРОВОЕ ПОЛЕ === -->
+    <div id="game-screen" class="screen">
+        <div class="game-container">
+            <div class="game-header">
+                <button id="back-from-game" class="back-btn">←</button>
+                <div class="game-info">
+                    <div id="timer">00:00</div>
+                    <div id="mines-left">000</div>
+                </div>
+                <button id="restart-game" class="restart-btn">↻</button>
+            </div>
+            
+            <div id="game-field" class="game-field"></div>
+
+            <div class="game-status" id="game-status"></div>
         </div>
     </div>
 
