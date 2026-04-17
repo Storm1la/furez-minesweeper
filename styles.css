@@ -196,9 +196,7 @@ input[type="number"] {
     cursor: pointer;
 }
 
-.hidden {
-    display: none !important;
-}
+/* ... (весь предыдущий код до .hidden остается без изменений) ... */
 
 .back-btn {
     background: none;
