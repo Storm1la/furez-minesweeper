@@ -10,7 +10,7 @@ body {
     color: var(--tg-theme-text-color, #ffffff);
     min-height: 100vh;
     overflow: hidden;
-    -webkit-tap-highlight-color: transparent; /* Убирает синее выделение */
+    -webkit-tap-highlight-color: transparent;
 }
 
 .container {
@@ -43,7 +43,7 @@ body {
 
 .subtitle {
     font-size: 18px;
-    opacity: 0.8;
+    opacity: 0.9;                    /* Сделали ярче */
     color: var(--tg-theme-hint-color, #aaaaaa);
 }
 
@@ -65,12 +65,12 @@ body {
 
 .solo { 
     background: linear-gradient(135deg, #4ade80, #22c55e); 
-    color: #ffffff; /* Белый текст на кнопке Одиночная */
+    color: #ffffff;
 }
 .coop { background: linear-gradient(135deg, #60a5fa, #3b82f6); color: #fff; }
 .duel { background: linear-gradient(135deg, #f472b6, #ec4899); color: #fff; }
 
-/* Футер (версия) */
+/* Футер */
 .footer {
     margin-top: auto;
     padding-top: 60px;
@@ -79,8 +79,8 @@ body {
 
 .version {
     font-size: 14px;
-    opacity: 0.7;
-    color: var(--tg-theme-hint-color, #aaaaaa); /* Тот же цвет, что у подзаголовка */
+    opacity: 0.85;                   /* Сделали ярче */
+    color: var(--tg-theme-hint-color, #aaaaaa);
 }
 
 /* ==================== НАСТРОЙКИ ==================== */
@@ -94,10 +94,11 @@ body {
 .back-btn {
     background: none;
     border: none;
-    font-size: 32px;
+    font-size: 28px;
     cursor: pointer;
     padding: 8px 12px;
     border-radius: 12px;
+    line-height: 1;
 }
 
 .back-btn:hover {
@@ -110,15 +111,10 @@ body {
     gap: 32px;
 }
 
-.setting-group {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-label {
+.setting-group label {
     font-size: 18px;
     font-weight: 500;
+    color: var(--tg-theme-text-color, #ffffff);
 }
 
 .preset-buttons {
@@ -184,7 +180,7 @@ input[type="number"] {
 
 .info-text {
     font-size: 14px;
-    opacity: 0.75;
+    opacity: 0.8;
     color: var(--tg-theme-hint-color, #aaaaaa);
 }
 
