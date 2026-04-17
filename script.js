@@ -121,7 +121,6 @@ startGameBtn.addEventListener('click', () => {
 
     const mines = parseInt(minesInput.value);
 
-    // Проверка ограничений
     if (rows < 5 || cols < 5 || rows > 30 || cols > 30) {
         tg.showAlert('Размер поля должен быть от 5 до 30');
         return;
@@ -131,7 +130,6 @@ startGameBtn.addEventListener('click', () => {
         return;
     }
 
-    // Запускаем игру
     startNewGame(rows, cols, mines);
 });
 
@@ -148,7 +146,6 @@ function startNewGame(rows, cols, mines) {
     clearInterval(timerInterval);
     gameStatus.textContent = '';
 
-    // Создаём пустое поле
     gameBoard = Array(rows).fill().map(() => 
         Array(cols).fill().map(() => ({
             isMine: false,
@@ -157,8 +154,6 @@ function startNewGame(rows, cols, mines) {
             adjacentMines: 0
         }))
     );
-
-    // Генерация поля будет при первом клике (чтобы первое нажатие никогда не было миной)
 
     showScreen('game-screen');
     renderField();
@@ -201,7 +196,7 @@ function renderField() {
     }
 }
 
-// ==================== ОБРАБОТКА КЛИКОВ ====================
+// ==================== КЛИКИ ====================
 function handleLeftClick(e) {
     if (isGameOver) return;
     const row = parseInt(e.target.dataset.row);
@@ -232,11 +227,7 @@ function handleRightClick(e) {
     updateMinesLeft();
 
     const cellEl = e.target;
-    if (cellData.flagged) {
-        cellEl.classList.add('flagged');
-    } else {
-        cellEl.classList.remove('flagged');
-    }
+    cellEl.classList.toggle('flagged', cellData.flagged);
 }
 
 function placeMines(firstRow, firstCol) {
@@ -252,11 +243,12 @@ function placeMines(firstRow, firstCol) {
         placed++;
     }
 
-    // Подсчёт соседних мин
+    // Подсчёт соседей
     for (let r = 0; r < gameRows; r++) {
         for (let c = 0; c < gameCols; c++) {
-            if (gameBoard[r][c].isMine) continue;
-            gameBoard[r][c].adjacentMines = countAdjacentMines(r, c);
+            if (!gameBoard[r][c].isMine) {
+                gameBoard[r][c].adjacentMines = countAdjacentMines(r, c);
+            }
         }
     }
 }
@@ -296,7 +288,6 @@ function revealCell(row, col) {
         cellEl.textContent = cellData.adjacentMines;
         cellEl.classList.add(`number-${cellData.adjacentMines}`);
     } else {
-        // Рекурсивное открытие пустых клеток
         for (let dr = -1; dr <= 1; dr++) {
             for (let dc = -1; dc <= 1; dc++) {
                 if (dr === 0 && dc === 0) continue;
@@ -324,13 +315,13 @@ function endGame(won) {
     } else {
         gameStatus.textContent = '💥 Взрыв!';
         gameStatus.style.color = '#f87171';
-        
-        // Показываем все мины
+
+        // Показать все мины
         for (let r = 0; r < gameRows; r++) {
             for (let c = 0; c < gameCols; c++) {
                 if (gameBoard[r][c].isMine) {
                     const cell = document.querySelector(`.cell[data-row="${r}"][data-col="${c}"]`);
-                    if (!cell.classList.contains('revealed')) {
+                    if (cell && !cell.classList.contains('revealed')) {
                         cell.classList.add('revealed', 'mine');
                     }
                 }
@@ -339,7 +330,7 @@ function endGame(won) {
     }
 }
 
-// Рестарт текущей игры
+// Рестарт
 restartGameBtn.addEventListener('click', () => {
     startNewGame(gameRows, gameCols, totalMines);
 });
