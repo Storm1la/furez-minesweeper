@@ -28,7 +28,7 @@ body {
     display: block;
 }
 
-/* Главное меню (оставляем как было) */
+/* Главное меню */
 .header {
     text-align: center;
     margin-bottom: 60px;
@@ -43,7 +43,6 @@ body {
 .subtitle {
     font-size: 18px;
     opacity: 0.8;
-    color: var(--tg-theme-hint-color, #aaaaaa);
 }
 
 .menu {
@@ -66,7 +65,7 @@ body {
 .coop { background: linear-gradient(135deg, #60a5fa, #3b82f6); color: #fff; }
 .duel { background: linear-gradient(135deg, #f472b6, #ec4899); color: #fff; }
 
-/* Настройки */
+/* ==================== НАСТРОЙКИ ==================== */
 .settings-header {
     display: flex;
     align-items: center;
@@ -79,19 +78,18 @@ body {
     border: none;
     font-size: 32px;
     cursor: pointer;
-    padding: 8px;
+    padding: 8px 12px;
     border-radius: 12px;
-    transition: background 0.2s;
 }
 
 .back-btn:hover {
-    background: rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.08);
 }
 
 .settings-form {
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 32px;
 }
 
 .setting-group {
@@ -103,9 +101,10 @@ body {
 label {
     font-size: 18px;
     font-weight: 500;
-    opacity: 0.9;
+    color: var(--tg-theme-text-color, #ffffff);
 }
 
+/* Кнопки выбора размера — исправлена читаемость в тёмной теме */
 .preset-buttons {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -113,23 +112,40 @@ label {
 }
 
 .preset-btn {
-    padding: 16px 12px;
+    padding: 16px 10px;
     background: var(--tg-theme-secondary-bg-color, #2c2c2c);
-    border: 2px solid transparent;
-    border-radius: 12px;
+    color: var(--tg-theme-text-color, #ffffff);
+    border: 2px solid #555;
+    border-radius: 14px;
     font-size: 17px;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.2s;
+    transition: all 0.25s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.preset-btn small {
+    font-size: 13px;
+    opacity: 0.85;
+    display: block;
+    margin-top: 4px;
 }
 
 .preset-btn.active {
     border-color: var(--tg-theme-accent-text-color, #00a3ff);
-    background: rgba(0, 163, 255, 0.15);
+    background: rgba(0, 163, 255, 0.20);
+    box-shadow: 0 0 0 3px rgba(0, 163, 255, 0.15);
+    color: var(--tg-theme-text-color, #ffffff);
 }
 
+.preset-btn:hover {
+    border-color: var(--tg-theme-accent-text-color, #00a3ff);
+    background: rgba(255,255,255,0.08);
+}
+
+/* Поля ввода для своего размера */
 .custom-fields {
-    margin-top: 10px;
+    margin-top: 8px;
 }
 
 .input-row {
@@ -140,12 +156,12 @@ label {
 
 input[type="number"] {
     width: 100%;
-    padding: 14px;
+    padding: 14px 16px;
     font-size: 18px;
     background: var(--tg-theme-secondary-bg-color, #2c2c2c);
-    border: 1px solid #555;
+    color: var(--tg-theme-text-color, #ffffff);
+    border: 1px solid #666;
     border-radius: 10px;
-    color: var(--tg-theme-text-color, #fff);
 }
 
 .mines-input {
@@ -155,7 +171,8 @@ input[type="number"] {
 
 .info-text {
     font-size: 14px;
-    opacity: 0.7;
+    opacity: 0.75;
+    color: var(--tg-theme-hint-color, #aaaaaa);
 }
 
 .start-btn {
@@ -168,6 +185,7 @@ input[type="number"] {
     border: none;
     border-radius: 16px;
     cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 163, 255, 0.3);
 }
 
 .hidden {
