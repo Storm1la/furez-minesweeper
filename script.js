@@ -2,7 +2,6 @@ const tg = window.Telegram.WebApp;
 tg.expand();
 tg.ready();
 
-let currentScreen = 'main-menu';
 let gameBoard = [];
 let gameRows = 0;
 let gameCols = 0;
@@ -32,17 +31,16 @@ const minesInfo = document.getElementById('mines-info');
 
 // Элементы игры
 const gameField = document.getElementById('game-field');
+const minesCountEl = document.getElementById('mines-count');
 const timerEl = document.getElementById('timer');
-const minesLeftEl = document.getElementById('mines-left');
-const backFromGame = document.getElementById('back-from-game');
-const restartGameBtn = document.getElementById('restart-game');
+const fzLogo = document.getElementById('fz-logo');
+const settingsBtn = document.getElementById('settings-btn');
 const gameStatus = document.getElementById('game-status');
 
 // ==================== НАВИГАЦИЯ ====================
 function showScreen(screenId) {
     document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
     document.getElementById(screenId).classList.add('active');
-    currentScreen = screenId;
 }
 
 btnSolo.addEventListener('click', () => {
@@ -52,9 +50,21 @@ btnSolo.addEventListener('click', () => {
 
 backToMenu.addEventListener('click', () => showScreen('main-menu'));
 
-backFromGame.addEventListener('click', () => {
-    clearInterval(timerInterval);
-    showScreen('solo-settings');
+// Клик по логотипу FZ — выход в главное меню
+fzLogo.addEventListener('click', () => {
+    tg.showPopup({
+        title: 'Выход в меню',
+        message: 'Вы действительно хотите выйти в главное меню?\nПрогресс текущей игры будет потерян.',
+        buttons: [
+            { id: 'cancel', type: 'cancel', text: 'Отмена' },
+            { id: 'exit', type: 'destructive', text: 'Выйти в меню' }
+        ]
+    }, (buttonId) => {
+        if (buttonId === 'exit') {
+            clearInterval(timerInterval);
+            showScreen('main-menu');
+        }
+    });
 });
 
 // ==================== НАСТРОЙКИ ====================
@@ -173,13 +183,13 @@ function startTimer() {
 
 function updateMinesLeft() {
     const left = totalMines - flagsPlaced;
-    minesLeftEl.textContent = String(left).padStart(3, '0');
+    minesCountEl.textContent = String(left).padStart(3, '0');
 }
 
 // ==================== РЕНДЕР ПОЛЯ ====================
 function renderField() {
     gameField.innerHTML = '';
-    gameField.style.gridTemplateColumns = `repeat(${gameCols}, 32px)`;
+    gameField.style.gridTemplateColumns = `repeat(${gameCols}, 34px)`;
 
     for (let r = 0; r < gameRows; r++) {
         for (let c = 0; c < gameCols; c++) {
@@ -196,7 +206,7 @@ function renderField() {
     }
 }
 
-// ==================== КЛИКИ ====================
+// ==================== ОБРАБОТКА КЛИКОВ ====================
 function handleLeftClick(e) {
     if (isGameOver) return;
     const row = parseInt(e.target.dataset.row);
@@ -243,7 +253,6 @@ function placeMines(firstRow, firstCol) {
         placed++;
     }
 
-    // Подсчёт соседей
     for (let r = 0; r < gameRows; r++) {
         for (let c = 0; c < gameCols; c++) {
             if (!gameBoard[r][c].isMine) {
@@ -316,7 +325,7 @@ function endGame(won) {
         gameStatus.textContent = '💥 Взрыв!';
         gameStatus.style.color = '#f87171';
 
-        // Показать все мины
+        // Показываем все мины
         for (let r = 0; r < gameRows; r++) {
             for (let c = 0; c < gameCols; c++) {
                 if (gameBoard[r][c].isMine) {
@@ -330,9 +339,9 @@ function endGame(won) {
     }
 }
 
-// Рестарт
-restartGameBtn.addEventListener('click', () => {
-    startNewGame(gameRows, gameCols, totalMines);
+// Шестерёнка (пока только заглушка)
+settingsBtn.addEventListener('click', () => {
+    tg.showAlert('Настройки игры будут здесь в следующих версиях');
 });
 
-console.log('FureZ Minesweeper v0.5 загружен');
+console.log('FureZ Minesweeper v0.6 — новый дизайн шапки загружен');
