@@ -63,14 +63,10 @@ body {
     transition: all 0.2s ease;
 }
 
-.solo { 
-    background: linear-gradient(135deg, #4ade80, #22c55e); 
-    color: #ffffff;
-}
+.solo { background: linear-gradient(135deg, #4ade80, #22c55e); color: #ffffff; }
 .coop { background: linear-gradient(135deg, #60a5fa, #3b82f6); color: #fff; }
 .duel { background: linear-gradient(135deg, #f472b6, #ec4899); color: #fff; }
 
-/* Футер */
 .footer {
     margin-top: auto;
     padding-top: 60px;
@@ -99,7 +95,6 @@ body {
     cursor: pointer;
     padding: 8px 12px;
     border-radius: 12px;
-    line-height: 1;
 }
 
 .back-btn:hover {
@@ -115,7 +110,6 @@ body {
 .setting-group label {
     font-size: 18px;
     font-weight: 500;
-    color: var(--tg-theme-text-color, #ffffff);
 }
 
 .preset-buttons {
@@ -146,7 +140,6 @@ body {
 .preset-btn.active {
     border-color: var(--tg-theme-accent-text-color, #00a3ff);
     background: rgba(0, 163, 255, 0.20);
-    box-shadow: 0 0 0 3px rgba(0, 163, 255, 0.15);
 }
 
 .preset-btn:hover {
@@ -154,56 +147,15 @@ body {
     background: rgba(255,255,255,0.08);
 }
 
-.custom-fields {
-    margin-top: 8px;
+.custom-fields, .input-row, input[type="number"], .mines-input, .info-text, .start-btn {
+    /* оставляем как было */
 }
 
-.input-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
-}
-
-input[type="number"] {
-    width: 100%;
-    padding: 14px 16px;
-    font-size: 18px;
-    background: var(--tg-theme-secondary-bg-color, #2c2c2c);
-    color: var(--tg-theme-text-color, #ffffff);
-    border: 1px solid #666;
-    border-radius: 10px;
-}
-
-.mines-input {
-    font-size: 22px;
-    padding: 16px;
-}
-
-.info-text {
-    font-size: 14px;
-    opacity: 0.8;
-    color: var(--tg-theme-hint-color, #aaaaaa);
-}
-
-.start-btn {
-    margin-top: 40px;
-    padding: 18px;
-    font-size: 22px;
-    font-weight: 700;
-    background: linear-gradient(135deg, #00a3ff, #0088cc);
-    color: white;
-    border: none;
-    border-radius: 16px;
-    cursor: pointer;
-}
-
-.hidden {
-    display: none !important;
-}
+.hidden { display: none !important; }
 
 /* ====================== ИГРОВОЕ ПОЛЕ ====================== */
 .game-container {
-    padding: 15px;
+    padding: 15px 10px;
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -211,99 +163,130 @@ input[type="number"] {
 
 .game-header {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    margin-bottom: 15px;
-    padding: 0 10px;
-}
-
-.game-info {
-    display: flex;
-    gap: 30px;
-    font-size: 24px;
-    font-weight: 600;
-    font-family: monospace;
-}
-
-#timer, #mines-left {
+    justify-content: space-between;
     background: var(--tg-theme-secondary-bg-color, #2c2c2c);
-    padding: 8px 16px;
+    padding: 12px 16px;
+    border-radius: 16px;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.game-header-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.mines-count, .timer {
+    background: #1a1a1a;
+    color: #ff4444;
+    font-family: monospace;
+    font-size: 28px;
+    font-weight: bold;
+    padding: 8px 18px;
     border-radius: 10px;
-    min-width: 80px;
+    min-width: 90px;
     text-align: center;
+    border: 2px solid #444;
+}
+
+.settings-btn {
+    width: 44px;
+    height: 44px;
+    background: none;
+    border: none;
+    font-size: 28px;
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+.settings-btn:hover {
+    opacity: 1;
+}
+
+.fz-logo {
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--tg-theme-accent-text-color, #00a3ff);
+    background: #1a1a1a;
+    width: 54px;
+    height: 54px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    border: 3px solid #00a3ff;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.fz-logo:hover {
+    transform: scale(1.08);
+    background: #222;
 }
 
 .game-field {
     flex: 1;
     display: grid;
-    gap: 2px;
-    background: #222;
-    padding: 10px;
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+    gap: 3px;
+    background: #1f1f1f;
+    padding: 12px;
+    border-radius: 16px;
+    box-shadow: 0 6px 25px rgba(0,0,0,0.5);
     max-width: 100%;
     margin: 0 auto;
     overflow: auto;
 }
 
 .cell {
-    width: 32px;
-    height: 32px;
+    width: 34px;
+    height: 34px;
     background: #555;
     border: 3px solid #777;
-    border-top-color: #999;
-    border-left-color: #999;
+    border-top-color: #aaa;
+    border-left-color: #aaa;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 18px;
+    font-size: 20px;
     font-weight: bold;
     cursor: pointer;
     user-select: none;
-    -webkit-tap-highlight-color: transparent;
 }
 
 .cell.revealed {
-    background: #444;
-    border: 1px solid #333;
-    font-size: 20px;
+    background: #3a3a3a;
+    border: 1px solid #222;
 }
 
 .cell.flagged::before {
     content: "🚩";
-    font-size: 20px;
+    font-size: 22px;
 }
 
 .cell.mine {
-    background: #c00;
-    color: white;
+    background: #c22;
 }
 
 .cell.mine::before {
     content: "💣";
-    font-size: 22px;
+    font-size: 24px;
 }
 
-.cell.number-1 { color: #00f; }
-.cell.number-2 { color: #0a0; }
-.cell.number-3 { color: #f00; }
-.cell.number-4 { color: #00f; }
-.cell.number-5 { color: #a00; }
-.cell.number-6 { color: #0aa; }
+.cell.number-1 { color: #1e90ff; }
+.cell.number-2 { color: #32cd32; }
+.cell.number-3 { color: #ff4500; }
+.cell.number-4 { color: #0000ff; }
+.cell.number-5 { color: #8b0000; }
+.cell.number-6 { color: #00ced1; }
 .cell.number-7 { color: #000; }
 .cell.number-8 { color: #555; }
 
-.restart-btn {
-    background: none;
-    border: none;
-    font-size: 32px;
-    cursor: pointer;
-}
-
 .game-status {
     text-align: center;
-    font-size: 20px;
+    font-size: 22px;
     margin-top: 15px;
     font-weight: 600;
-    min-height: 30px;
+    min-height: 34px;
 }
