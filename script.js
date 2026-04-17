@@ -29,7 +29,7 @@ const customHeight = document.getElementById('custom-height');
 const minesInput = document.getElementById('mines');
 const minesInfo = document.getElementById('mines-info');
 
-// Элементы игры
+// Элементы новой шапки игры
 const gameField = document.getElementById('game-field');
 const minesCountEl = document.getElementById('mines-count');
 const timerEl = document.getElementById('timer');
@@ -50,7 +50,7 @@ btnSolo.addEventListener('click', () => {
 
 backToMenu.addEventListener('click', () => showScreen('main-menu'));
 
-// Клик по логотипу FZ — выход в главное меню
+// Клик по FZ — выход в меню
 fzLogo.addEventListener('click', () => {
     tg.showPopup({
         title: 'Выход в меню',
@@ -206,7 +206,7 @@ function renderField() {
     }
 }
 
-// ==================== ОБРАБОТКА КЛИКОВ ====================
+// ==================== КЛИКИ ====================
 function handleLeftClick(e) {
     if (isGameOver) return;
     const row = parseInt(e.target.dataset.row);
@@ -285,6 +285,7 @@ function revealCell(row, col) {
     revealedCount++;
 
     const cellEl = document.querySelector(`.cell[data-row="${row}"][data-col="${col}"]`);
+    if (!cellEl) return;
     cellEl.classList.add('revealed');
 
     if (cellData.isMine) {
@@ -325,7 +326,6 @@ function endGame(won) {
         gameStatus.textContent = '💥 Взрыв!';
         gameStatus.style.color = '#f87171';
 
-        // Показываем все мины
         for (let r = 0; r < gameRows; r++) {
             for (let c = 0; c < gameCols; c++) {
                 if (gameBoard[r][c].isMine) {
@@ -339,9 +339,9 @@ function endGame(won) {
     }
 }
 
-// Шестерёнка (пока только заглушка)
+// Шестерёнка (заглушка)
 settingsBtn.addEventListener('click', () => {
     tg.showAlert('Настройки игры будут здесь в следующих версиях');
 });
 
-console.log('FureZ Minesweeper v0.6 — новый дизайн шапки загружен');
+console.log('FureZ Minesweeper v0.6 — исправленная версия загружена');
