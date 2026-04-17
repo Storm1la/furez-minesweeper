@@ -48,24 +48,63 @@ presetBtns.forEach(btn => {
     });
 });
 
-// Динамическое обновление рекомендации при вводе своего размера
+// Ограничение ширины и высоты (5–30)
+function clampValue(input, min, max) {
+    let value = parseInt(input.value);
+    if (isNaN(value)) value = min;
+    if (value < min) value = min;
+    if (value > max) value = max;
+    input.value = value;
+}
+
+customWidth.addEventListener('input', () => {
+    clampValue(customWidth, 5, 30);
+    updateCustomMines();
+});
+
+customHeight.addEventListener('input', () => {
+    clampValue(customHeight, 5, 30);
+    updateCustomMines();
+});
+
+// Динамическое обновление рекомендации мин
 function updateCustomMines() {
     const width = parseInt(customWidth.value) || 10;
     const height = parseInt(customHeight.value) || 10;
     updateMinesRecommendation(width, height);
 }
 
-customWidth.addEventListener('input', updateCustomMines);
-customHeight.addEventListener('input', updateCustomMines);
-
 function updateMinesRecommendation(width, height) {
     if (width < 5 || height < 5) return;
     
     const totalCells = width * height;
-    const recommended = Math.max(1, Math.floor(totalCells * 0.156));
+    let recommended = Math.floor(totalCells * 0.156);
+    recommended = Math.min(recommended, totalCells - 1); // не больше клеток - 1
+    recommended = Math.max(1, recommended);
+
     minesInput.value = recommended;
     minesInfo.textContent = `Рекомендуется: ${recommended} для ${width}×${height}`;
 }
+
+// Ограничение количества мин
+minesInput.addEventListener('input', () => {
+    const width = parseInt(document.querySelector('.preset-btn.active').id === 'custom-size' 
+        ? customWidth.value 
+        : document.querySelector('.preset-btn.active').dataset.width);
+    
+    const height = parseInt(document.querySelector('.preset-btn.active').id === 'custom-size' 
+        ? customHeight.value 
+        : document.querySelector('.preset-btn.active').dataset.height);
+    
+    const totalCells = width * height;
+    let value = parseInt(minesInput.value);
+    
+    if (isNaN(value)) value = 1;
+    if (value < 1) value = 1;
+    if (value > totalCells - 1) value = totalCells - 1;
+    
+    minesInput.value = value;
+});
 
 // Кнопка "Начать игру"
 startGameBtn.addEventListener('click', () => {
@@ -83,16 +122,6 @@ startGameBtn.addEventListener('click', () => {
 
     const mines = parseInt(minesInput.value);
 
-    if (!width || !height || width < 5 || height < 5 || width > 30 || height > 30) {
-        tg.showAlert('Размер поля должен быть от 5×5 до 30×30');
-        return;
-    }
-
-    if (mines < 1 || mines >= width * height) {
-        tg.showAlert('Количество мин должно быть от 1 до количества клеток минус 1');
-        return;
-    }
-
     tg.showPopup({
         title: 'Игра запущена!',
         message: `Поле: ${width}×${height}\nМин: ${mines}`,
@@ -101,4 +130,4 @@ startGameBtn.addEventListener('click', () => {
 });
 
 tg.MainButton.hide();
-console.log('FureZ Minesweeper v0.3 загружен');
+console.log('FureZ Minesweeper v0.4 загружен');
