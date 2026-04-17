@@ -23,12 +23,12 @@
             </div>
 
             <div class="footer">
-                <p class="version">v0.5 • Сделано с ❤️ by FureZ</p>
+                <p class="version">v0.6 • Сделано с ❤️ by FureZ</p>
             </div>
         </div>
     </div>
 
-    <!-- Экран настроек -->
+    <!-- Экран настроек Одиночной игры -->
     <div id="solo-settings" class="screen">
         <div class="container">
             <div class="header settings-header">
@@ -71,20 +71,22 @@
         </div>
     </div>
 
-    <!-- === НОВЫЙ ЭКРАН: ИГРОВОЕ ПОЛЕ === -->
+    <!-- Экран игры -->
     <div id="game-screen" class="screen">
         <div class="game-container">
+            <!-- Новая шапка по твоему описанию -->
             <div class="game-header">
-                <button id="back-from-game" class="back-btn">←</button>
-                <div class="game-info">
-                    <div id="timer">00:00</div>
-                    <div id="mines-left">000</div>
+                <div class="game-header-left">
+                    <div id="mines-count" class="mines-count">000</div>
+                    <button id="settings-btn" class="settings-btn">⚙️</button>
                 </div>
-                <button id="restart-game" class="restart-btn">↻</button>
+                
+                <div id="fz-logo" class="fz-logo">FZ</div>
+                
+                <div id="timer" class="timer">00:00</div>
             </div>
             
             <div id="game-field" class="game-field"></div>
-
             <div class="game-status" id="game-status"></div>
         </div>
     </div>
