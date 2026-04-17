@@ -1,8 +1,4 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -12,88 +8,145 @@ body {
     overflow: hidden;
 }
 
-.container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    padding: 20px;
-    text-align: center;
-}
+.container { padding: 20px; text-align: center; }
 
-.header {
-    margin-bottom: 60px;
-}
+.screen { display: none; flex-direction: column; min-height: 100vh; }
+.screen.active { display: flex; }
 
-.title {
-    font-size: 42px;
-    font-weight: 700;
-    margin-bottom: 8px;
-    color: var(--tg-theme-accent-text-color, #00a3ff);
-    text-shadow: 0 2px 10px rgba(0, 163, 255, 0.3);
-}
+.title { font-size: 42px; font-weight: 700; color: #00a3ff; }
+.subtitle { font-size: 18px; opacity: 0.8; margin-top: 8px; }
 
-.subtitle {
-    font-size: 18px;
-    opacity: 0.8;
-    color: var(--tg-theme-hint-color, #aaaaaa);
-}
-
-.menu {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    width: 100%;
-    max-width: 320px;
+.menu { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 16px; 
+    width: 100%; 
+    max-width: 340px; 
+    margin: 0 auto;
 }
 
 .menu-btn {
-    padding: 18px 24px;
+    padding: 18px;
     font-size: 22px;
     font-weight: 600;
     border: none;
     border-radius: 16px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-}
-
-.menu-btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-}
-
-.menu-btn:active {
-    transform: scale(0.97);
-}
-
-.solo {
-    background: linear-gradient(135deg, #4ade80, #22c55e);
     color: #111;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
 }
 
-.coop {
-    background: linear-gradient(135deg, #60a5fa, #3b82f6);
-    color: #fff;
+.solo { background: linear-gradient(135deg, #4ade80, #22c55e); }
+.coop { background: linear-gradient(135deg, #60a5fa, #3b82f6); color: white; }
+.duel { background: linear-gradient(135deg, #f472b6, #ec4899); color: white; }
+
+.screen-title { font-size: 28px; margin-bottom: 30px; }
+
+.settings { margin-bottom: 40px; text-align: left; max-width: 300px; margin-left: auto; margin-right: auto; }
+
+.setting-group {
+    margin-bottom: 20px;
 }
 
-.duel {
-    background: linear-gradient(135deg, #f472b6, #ec4899);
-    color: #fff;
+.setting-group label {
+    display: block;
+    margin-bottom: 6px;
+    opacity: 0.9;
 }
 
-/* Адаптация под тёмную/светлую тему Telegram */
-.footer {
-    margin-top: 80px;
-    opacity: 0.6;
-    font-size: 14px;
+.setting-group select, .setting-group input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 12px;
+    background: var(--tg-theme-secondary-bg-color, #2c2c2c);
+    color: var(--tg-theme-text-color, #fff);
+    border: none;
+    font-size: 17px;
 }
 
-/* Если Telegram передаёт светлую тему — немного подправим */
-@media (prefers-color-scheme: light) {
-    .container {
-        background: var(--tg-theme-bg-color, #ffffff);
-        color: var(--tg-theme-text-color, #000000);
-    }
+.start-btn {
+    background: #22c55e;
+    color: #111;
+    padding: 16px 40px;
+    font-size: 20px;
+    font-weight: 600;
+    border: none;
+    border-radius: 16px;
+    margin-bottom: 15px;
+    width: 100%;
+    max-width: 300px;
+}
+
+.back-btn {
+    background: transparent;
+    color: var(--tg-theme-hint-color, #aaa);
+    border: 2px solid var(--tg-theme-hint-color, #aaa);
+    padding: 12px 30px;
+    border-radius: 12px;
+}
+
+/* Игровое поле */
+.game-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 20px;
+    background: rgba(0,0,0,0.3);
+    font-size: 24px;
+    font-weight: bold;
+    width: 100%;
+}
+
+.board {
+    display: grid;
+    gap: 2px;
+    background: #333;
+    padding: 10px;
+    border-radius: 12px;
+    margin: 10px auto;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+}
+
+.cell {
+    width: 32px;
+    height: 32px;
+    background: #bbb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    user-select: none;
+    border: 2px solid #ddd;
+    border-top-color: #fff;
+    border-left-color: #fff;
+}
+
+.cell.revealed {
+    background: #ddd;
+    border: 1px solid #888;
+}
+
+.cell.mine { background: #ff4444; }
+.cell.flag { background: #ffdd44; }
+
+.number-1 { color: #1976d2; }
+.number-2 { color: #388e3c; }
+.number-3 { color: #d32f2f; }
+.number-4 { color: #7b1fa2; }
+.number-5 { color: #f57c00; }
+.number-6 { color: #0097a7; }
+.number-7 { color: #000; }
+.number-8 { color: #555; }
+
+.game-controls {
+    margin-top: 20px;
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+}
+
+.control-btn {
+    padding: 12px 24px;
+    font-size: 16px;
+    border-radius: 12px;
 }
