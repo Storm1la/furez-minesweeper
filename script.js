@@ -18,7 +18,7 @@ const mainMenu = document.getElementById('main-menu');
 const soloSettings = document.getElementById('solo-settings');
 const gameScreen = document.getElementById('game-screen');
 
-// Элементы настроек
+// Элементы настроек (окно "Классика")
 const btnSolo = document.getElementById('btn-solo');
 const backToMenu = document.getElementById('back-to-menu');
 const startGameBtn = document.getElementById('start-game');
@@ -29,7 +29,7 @@ const customHeight = document.getElementById('custom-height');
 const minesInput = document.getElementById('mines');
 const minesInfo = document.getElementById('mines-info');
 
-// Элементы новой шапки игры
+// Элементы игровой шапки
 const gameField = document.getElementById('game-field');
 const minesCountEl = document.getElementById('mines-count');
 const timerEl = document.getElementById('timer');
@@ -183,7 +183,7 @@ function startTimer() {
 
 function updateMinesLeft() {
     const left = totalMines - flagsPlaced;
-    minesCountEl.textContent = String(left).padStart(3, '0');
+    if (minesCountEl) minesCountEl.textContent = String(left).padStart(3, '0');
 }
 
 // ==================== РЕНДЕР ПОЛЯ ====================
@@ -286,6 +286,7 @@ function revealCell(row, col) {
 
     const cellEl = document.querySelector(`.cell[data-row="${row}"][data-col="${col}"]`);
     if (!cellEl) return;
+
     cellEl.classList.add('revealed');
 
     if (cellData.isMine) {
@@ -339,9 +340,9 @@ function endGame(won) {
     }
 }
 
-// Шестерёнка (заглушка)
+// Шестерёнка — заглушка
 settingsBtn.addEventListener('click', () => {
     tg.showAlert('Настройки игры будут здесь в следующих версиях');
 });
 
-console.log('FureZ Minesweeper v0.6 — исправленная версия загружена');
+console.log('FureZ Minesweeper v0.6 — финальная исправленная версия');
